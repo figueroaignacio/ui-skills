@@ -21,7 +21,7 @@ You are an expert React 19 developer building components for the NachUI library.
 3. **CVA (class-variance-authority)**: Declare `cva` variant configurations outside the component function block. Export the configuration and its `VariantProps` type.
 
 ```typescript
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority'
 
 export const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors',
@@ -29,7 +29,8 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
       },
       size: {
         default: 'h-10 px-4 py-2',
@@ -41,7 +42,7 @@ export const buttonVariants = cva(
       size: 'default',
     },
   },
-);
+)
 ```
 
 ## Animation (Framer Motion)
@@ -81,15 +82,15 @@ Button.displayName = 'Button';
 - Context helpers must explicitly throw an descriptive error when consumed outside of their provider.
 
 ```typescript
-const AlertContext = React.createContext<AlertContextValue | null>(null);
+const AlertContext = React.createContext<AlertContextValue | null>(null)
 
 export const useAlertContext = () => {
-  const context = React.useContext(AlertContext);
+  const context = React.useContext(AlertContext)
   if (!context) {
-    throw new Error('useAlertContext must be used within an AlertProvider');
+    throw new Error('useAlertContext must be used within an AlertProvider')
   }
-  return context;
-};
+  return context
+}
 ```
 
 ## Import Order Guidelines

@@ -40,11 +40,11 @@ pnpm --filter @repo/cli dev
 New commands must be added to the Commander instance in `src/index.ts` and their logic defined under `src/commands/`.
 
 ```typescript
-import { Command } from 'commander';
+import { Command } from 'commander'
 
-const program = new Command();
+const program = new Command()
 
-program.name('nachui').description('Official CLI for NachUI').version('1.0.0');
+program.name('nachui').description('Official CLI for NachUI').version('1.0.0')
 
 program
   .command('my-command')
@@ -53,9 +53,9 @@ program
   .option('-f, --force', 'Force execution')
   .action(async (arg, options) => {
     // Import execution logic dynamically to keep startup fast
-    const { myCommandAction } = await import('./commands/my-command');
-    await myCommandAction(arg, options);
-  });
+    const { myCommandAction } = await import('./commands/my-command')
+    await myCommandAction(arg, options)
+  })
 ```
 
 ## Console Prompts & UI Style Guide (Clack & Kleur)
@@ -70,31 +70,31 @@ When designing user-facing console interfaces:
    - **Errors / Warnings:** Use `kleur.red()` for failure states.
 
 ```typescript
-import * as p from '@clack/prompts';
-import kleur from 'kleur';
+import * as p from '@clack/prompts'
+import kleur from 'kleur'
 
 export async function myCommandAction() {
-  p.intro(kleur.cyan('NachUI Command'));
+  p.intro(kleur.cyan('NachUI Command'))
 
   const result = await p.text({
     message: 'Enter input details:',
     placeholder: 'e.g., button',
     validate: (value) => {
-      if (!value) return 'Value is required!';
+      if (!value) return 'Value is required!'
     },
-  });
+  })
 
   if (p.isCancel(result)) {
-    p.cancel('Operation cancelled.');
-    process.exit(0);
+    p.cancel('Operation cancelled.')
+    process.exit(0)
   }
 
-  const s = p.spinner();
-  s.start('Running task...');
+  const s = p.spinner()
+  s.start('Running task...')
   // do work
-  s.stop(kleur.green('Task complete!'));
+  s.stop(kleur.green('Task complete!'))
 
-  p.outro(kleur.cyan('Done!'));
+  p.outro(kleur.cyan('Done!'))
 }
 ```
 
